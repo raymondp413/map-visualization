@@ -28,9 +28,19 @@ const droneDataRecevied = (state, action) => {
   };
 };
 
+const droneGeoDataReceived = (state, action) => {
+  const { data } = action;
+
+  return {
+    ...state,
+    address: data.results[0].formatted_address
+  }
+}
+
 const handlers = {
   [actions.FETCH_DRONE]: startLoading,
-  [actions.DRONE_DATA_RECEIVED]: droneDataRecevied
+  [actions.DRONE_DATA_RECEIVED]: droneDataRecevied,
+  [actions.DRONE_GEODATA_RECEIVED]: droneGeoDataReceived
 };
 
 export default (state = initialState, action) => {

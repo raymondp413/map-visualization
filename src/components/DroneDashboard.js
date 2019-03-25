@@ -21,7 +21,8 @@ class DroneDashboard extends Component {
     const {
       loading,
       //data,
-      lastDronePosition
+      lastDronePosition,
+      address
     } = this.props;
 
     // Only show the loading indicator if this is the
@@ -38,6 +39,11 @@ class DroneDashboard extends Component {
           markerLatitude={lastDronePosition.latitude}
           markerLongitude={lastDronePosition.longitude}
         />
+
+        <div style={{ marginTop: `20px` }}>
+          <span>Drone Address: </span>{address} <br />
+        </div>
+
         <div style={{marginTop: `20px`}}>
           <span>Temperature: </span>{lastDronePosition.metric } <br />
           <span>Latitude: </span>{lastDronePosition.latitude } <br />
@@ -53,13 +59,15 @@ const mapState = (state, ownProps) => {
   const {
     loading,
     //data,
-    lastDronePosition
+    lastDronePosition,
+    address
   } = state.drone;
 
   return {
     loading,
     //data,
-    lastDronePosition 
+    lastDronePosition,
+    address
   };
 };
 
