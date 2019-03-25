@@ -31,9 +31,13 @@ const droneDataRecevied = (state, action) => {
 const droneGeoDataReceived = (state, action) => {
   const { data } = action;
 
+  // Grab the first formatted address Google provides. Account for the
+  // possibility that no address is provided, which is typically over water.
+  const address = data.results.length > 0 ? data.results[0].formatted_address : 'Over Water';
+
   return {
     ...state,
-    address: data.results[0].formatted_address
+    address
   }
 }
 
