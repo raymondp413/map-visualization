@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../store/actions";
 import LinearProgress from "@material-ui/core/LinearProgress";
+import DroneMap from './DroneMap';
 
 class DroneDashboard extends Component {
 
@@ -33,10 +34,16 @@ class DroneDashboard extends Component {
 
     return (
       <div>
-        <span>Temperature: </span>{lastDronePosition.metric } <br />
-        <span>Latitude: </span>{lastDronePosition.latitude } <br />
-        <span>Longitude: </span>{lastDronePosition.longitude } <br />
-        <span>Last Received: </span>{elapsedTimeStr}<br />
+        <DroneMap
+          markerLatitude={lastDronePosition.latitude}
+          markerLongitude={lastDronePosition.longitude}
+        />
+        <div style={{marginTop: `20px`}}>
+          <span>Temperature: </span>{lastDronePosition.metric } <br />
+          <span>Latitude: </span>{lastDronePosition.latitude } <br />
+          <span>Longitude: </span>{lastDronePosition.longitude } <br />
+          <span>Last Received: </span>{elapsedTimeStr}<br />
+        </div>
       </div>
     );
   }
