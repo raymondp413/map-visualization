@@ -7,6 +7,13 @@ class DroneDashboard extends Component {
 
   componentDidMount() {
     this.props.onLoad();
+
+    this.timer = setInterval(() => this.props.onLoad(), 3000);
+  }
+
+  componentWillUnmount(){
+    clearInterval(this.timer);
+    this.timer = null;
   }
 
   render() {
@@ -16,7 +23,9 @@ class DroneDashboard extends Component {
       lastDronePosition
     } = this.props;
 
-    if (loading) return <LinearProgress />;
+    // Only show the loading indicator if this is the
+    // first time data has been acquired.
+    if (loading && lastDronePosition.timestamp === null) return <LinearProgress />;
 
     const currentDate = new Date();
     const elapsedSeconds = Math.ceil((currentDate.getTime() - lastDronePosition.timestamp)/1000);
